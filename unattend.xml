@@ -420,3 +420,82 @@
     </component>
   </settings>
 </unattend>
+<?xml version="1.0" encoding="utf-8"?>
+<unattend xmlns="urn:schemas-microsoft-com:unattend">
+  <settings pass="oobeSystem">
+    <component name="Microsoft-Windows-Shell-Setup"
+               processorArchitecture="amd64"
+               publicKeyToken="31bf3856ad364e35"
+               language="neutral"
+               versionScope="nonSxS"
+               xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State">
+
+      <!-- Apply custom Start menu layout -->
+      <StartLayoutFile>C:\Layouts\layout.xml</StartLayoutFile>
+
+      <!-- Apply power settings after first logon -->
+      <FirstLogonCommands>
+        <!-- Set High Performance power plan -->
+        <SynchronousCommand wcm:action="add">
+          <Order>1</Order>
+          <CommandLine>powercfg /setactive SCHEME_MIN</CommandLine>
+          <Description>Set High Performance power plan</Description>
+        </SynchronousCommand>
+
+        <!-- Turn off display after 10 minutes -->
+        <SynchronousCommand wcm:action="add">
+          <Order>2</Order>
+          <CommandLine>powercfg /change monitor-timeout-ac 10</CommandLine>
+          <Description>Set display timeout (AC power)</Description>
+        </SynchronousCommand>
+
+        <!-- Put computer to sleep after 30 minutes -->
+        <SynchronousCommand wcm:action="add">
+          <Order>3</Order>
+          <CommandLine>powercfg /change standby-timeout-ac 30</CommandLine>
+          <Description>Set sleep timeout (AC power)</Description>
+        </SynchronousCommand>
+      </FirstLogonCommands>
+
+    </component>
+  </settings>
+</unattend>
+<LayoutModificationTemplate
+    xmlns="http://schemas.microsoft.com/Start/2014/LayoutModification"
+    Version="1">
+  <LayoutOptions StartTileGroupCellWidth="6" />
+  <DefaultLayoutOverride>
+    <StartLayoutCollection>
+      <defaultlayout:StartLayout GroupCellWidth="6"
+        xmlns:defaultlayout="http://schemas.microsoft.com/Start/2014/FullDefaultLayout">
+        <start:Group Name="Productivity"
+          xmlns:start="http://schemas.microsoft.com/Start/2014/StartLayout">
+          <start:DesktopApplicationTile Size="2x2" DesktopApplicationLinkPath="%APPDATA%\Microsoft\Windows\Start Menu\Programs\Word.lnk"/>
+          <start:DesktopApplicationTile Size="2x2" DesktopApplicationLinkPath="%APPDATA%\Microsoft\Windows\Start Menu\Programs\Excel.lnk"/>
+          <start:DesktopApplicationTile Size="2x2" DesktopApplicationLinkPath="%APPDATA%\Microsoft\Windows\Start Menu\Programs\PowerPoint.lnk"/>
+        </start:Group>
+        <start:Group Name="Web & Tools"
+          xmlns:start="http://schemas.microsoft.com/Start/2014/StartLayout">
+          <start:DesktopApplicationTile Size="2x2" DesktopApplicationLinkPath="%APPDATA%\Microsoft\Windows\Start Menu\Programs\Microsoft Edge.lnk"/>
+          <start:DesktopApplicationTile Size="2x2" DesktopApplicationLinkPath="%APPDATA%\Microsoft\Windows\Start Menu\Programs\File Explorer.lnk"/>
+        </start:Group>
+      </defaultlayout:StartLayout>
+    </StartLayoutCollection>
+  </DefaultLayoutOverride>
+</LayoutModificationTemplate>
+<?xml version="1.0" encoding="utf-8"?>
+<unattend xmlns="urn:schemas-microsoft-com:unattend">
+  <settings pass="oobeSystem">
+    <component name="Microsoft-Windows-Shell-Setup"
+               processorArchitecture="amd64"
+               publicKeyToken="31bf3856ad364e35"
+               language="neutral"
+               versionScope="nonSxS"
+               xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State">
+
+      <StartLayoutFile>C:\Layouts\layout.xml</StartLayoutFile>
+      <CopyProfile>true</CopyProfile>
+
+    </component>
+  </settings>
+</unattend>
